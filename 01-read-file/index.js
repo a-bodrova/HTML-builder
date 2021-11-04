@@ -1,14 +1,14 @@
 const fs = require('fs');
 const path = require('path');
-const stream = require('stream');
+const { stdout } = process;
 
 const filePath = path.join(__dirname, 'text.txt');
 
 fs.readFile(filePath, (err, content) => {
-    if (err) {
-        throw err;
-    }
+  if (err) {
+    throw err;
+  }
 
-    const data = Buffer.from(content);
-    console.log(data.toString());
+  const data = Buffer.from(content);
+  stdout.write(data.toString());
 });
