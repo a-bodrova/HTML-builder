@@ -28,5 +28,5 @@ async function getDataFromFile(file) {
     if (err) console.error(err);
     return stats.size;
   });
-  console.log(fileName, '-', fileExt, '-', stats.size);
+  console.log(fileName, '-', fileExt, '-', stats.size + 'b');
 }
