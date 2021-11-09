@@ -6,7 +6,10 @@ const filePath = path.join(__dirname, 'text.txt');
 const greeting = 'Hello! Enter the text...\n';
 const farewell = 'Good bye!';
 
-stdout.write(greeting);
+fs.open(filePath, 'w', (err) => {
+  if (err) throw err;
+  stdout.write(greeting);;
+});
 
 process.on('SIGINT', () => {
   stdout.write(farewell);
