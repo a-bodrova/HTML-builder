@@ -1,6 +1,5 @@
-const { stat } = require('fs/promises');
+const { stat, readdir } = require('fs/promises');
 const path = require('path');
-const { readdir } = require('fs/promises');
 
 const filePath = path.join(__dirname, 'secret-folder');
 
@@ -28,5 +27,5 @@ async function getDataFromFile(file) {
     if (err) console.error(err);
     return stats.size;
   });
-  console.log(fileName, '-', fileExt, '-', stats.size + 'b');
+  console.log(fileName, '-', fileExt, '-', stats.size + ' b');
 }

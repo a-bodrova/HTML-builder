@@ -1,26 +1,32 @@
 const { copyFile, readdir, mkdir, rm } = require('fs/promises');
 const path = require('path');
 
-async function copyDir() {
-  const pathToDir = path.join(__dirname, 'files');
-  const pathToDest = path.join(__dirname, 'files-copy');
-  await mkdir(pathToDest, {recursive: true});
+const pathToDir = path.join(__dirname, 'files');
+const pathToDest = path.join(__dirname, 'files-copy');
+
+
+async function copyDir(from, to) {
+
+  await mkdir(to, {recursive: true});
+
   try {
-    const filesCopy = await readdir(pathToDest);
+    const filesCopy = await readdir(to);
     if (filesCopy.length > 0) {
       for (const fileCopy of filesCopy) {
-        const pathToCopyFile = path.join(__dirname, 'files-copy', fileCopy);
+        const pathToCopyFile = path.join(to, fileCopy);
         await rm(pathToCopyFile);
       }
     }
-    const files = await readdir(pathToDir);
+    const files = await readdir(from);
+
     for (const file of files) {
-      const pathToCopy = `${pathToDir}/${file}`;
-      const pathToDestFile = `${pathToDest}/${file}`;
+      const pathToCopy = path.join(from, file);
+      const pathToDestFile = path.join(to, file);
       await copyFile(pathToCopy, pathToDestFile);
     } 
   } catch(err) {
     console.error(`Catch error: ${err}`);
   }
 }
-copyDir();
+
+copyDir(pathToDir, pathToDest);

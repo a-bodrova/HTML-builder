@@ -3,12 +3,13 @@ const path = require('path');
 const { stdin, stdout } = process;
 
 const filePath = path.join(__dirname, 'text.txt');
+
 const greeting = 'Hello! Enter the text...\n';
-const farewell = 'Good bye!';
+const farewell = 'Good bye!\n';
 
 fs.open(filePath, 'w', (err) => {
   if (err) throw err;
-  stdout.write(greeting);;
+  stdout.write(greeting);
 });
 
 process.on('SIGINT', () => {
